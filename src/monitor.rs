@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use reqwest::{Url};
-use anyhow::{anyhow, Result};
+use anyhow::{Result};
 use serde::Deserialize;
 use crate::utils::{get_by_code, get_client};
 
@@ -95,7 +95,7 @@ pub fn detect(request: &DetectRequest) -> Result<DetectResponse> {
 
     let success = resp.status().is_success();
     if !success {
-        Ok(DetectResponse{ available: false, value: vec![] })
+        return Ok(DetectResponse{ available: false, value: vec![] })
     }
 
     let p = resp.json::<OriginResponse>()?;
