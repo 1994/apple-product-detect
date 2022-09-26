@@ -95,7 +95,7 @@ pub fn detect(request: &DetectRequest) -> Result<DetectResponse> {
 
     let success = resp.status().is_success();
     if !success {
-        return Err(anyhow!("status is not 200"));
+        Ok(DetectResponse{ available: false, value: vec![] })
     }
 
     let p = resp.json::<OriginResponse>()?;
