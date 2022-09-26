@@ -46,7 +46,7 @@ impl<'a> DingTalk<'a> {
     fn get_params(&self) -> HashMap<&str, String> {
         let mut p: HashMap<&str, String> = HashMap::new();
         p.insert("msgtype", "text".to_string());
-        let c = ContentWrapper { content: format!("抢抢抢，当前有货\n============={}\n", self.content)};
+        let c = ContentWrapper { content: format!("抢抢抢，当前有货\n=============\n{}\n", self.content)};
         let json_str = serde_json::to_string(&c).expect("serialize error");
         p.insert("text", json_str);
         p
@@ -68,7 +68,7 @@ impl<'a> PushService for DingTalk<'a> {
         let response =
             request.json(&p)
                 .send()?;
-        println!("{:?}", response.text());
+        println!("push result:{:?}", response.text());
         Ok(true)
     }
 }
